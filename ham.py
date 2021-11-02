@@ -31,16 +31,16 @@ def get_quote():
 
 @bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('We have logged in as {0.user}'.format(bot))
 
 @bot.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == bot.user:
         return
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
-        
+
 @bot.command()
 async def inspire(ctx):
     quote = get_quote()
