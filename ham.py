@@ -18,6 +18,7 @@ from discord.ext import commands
 """
 Changing from client class to bot class since bot is a subclass of client and provides more features
 """
+description = "HAM is a project by Payton Young"
 
 #client = discord.Client()
 bot = commands.Bot(command_prefix='!', description=description)
