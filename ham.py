@@ -17,7 +17,7 @@ Changing from client class to bot class since bot is a subclass of client and pr
 """
 
 #client = discord.Client()
-bot = commands.Bot(command_prefix='!', description=description
+bot = commands.Bot(command_prefix='!', description=description)
 
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
