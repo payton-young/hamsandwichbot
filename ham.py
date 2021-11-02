@@ -12,7 +12,12 @@ import json
 
 #testing zenquotes api functionality
 
-client = discord.Client()
+"""
+Changing from client class to bot class since bot is a subclass of client and provides more features
+"""
+
+#client = discord.Client()
+bot = commands.Bot(command_prefix='!', description=description
 
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
@@ -20,25 +25,23 @@ def get_quote():
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
   return(quote)
 
-@client.event
+@bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-@client.event
+@bot.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$inspire'):
-        quote = get_quote()
-        await message.channel.send(quote)
-
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
         
+@bot.command()
+async def inspire(ctx):
+    quote = get_quote()
+    await ctx.send(quote)     
         
 f = open("../token","r")
 token = f.read()
-
-
-client.run(token)
+bot.run(token)
