@@ -37,7 +37,7 @@ async def on_message(message):
         await message.channel.send('Hello!')
         
         
-f = open("../token",r)
+f = open("../token","r")
 token = f.read()
 
 
