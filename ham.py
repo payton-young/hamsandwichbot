@@ -3,6 +3,9 @@ import os
 import requests
 import json
 
+from discord.ext import commands
+
+
 #HAM is a project by Payton Young, this code started from an easily found disocrdbot template
 #template link can be found in first commit
 #this project is to practice utilzing python libraries and maintaing version control
