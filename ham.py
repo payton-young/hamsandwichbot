@@ -1,17 +1,24 @@
 import discord
 import os
+import requests
+import json
 
 #HAM is a project by Payton Young, this code started from an easily found disocrdbot template
-#below is the template
-#https://discordpy.readthedocs.io/en/latest/quickstart.html#a-minimal-bot
-
+#template link can be found in first commit
 #this project is to practice utilzing python libraries and maintaing version control
 
-#token can't be publically assigned for security reasons
 #can't be uploaded to github
 #will keep token locally and perhaps figure out secure distribution
 
+#testing zenquotes api functionality
+
 client = discord.Client()
+
+def get_quote():
+  response = requests.get("https://zenquotes.io/api/random")
+  json_data = json.loads(response.text)
+  quote = json_data[0]['q'] + " -" + json_data[0]['a']
+  return(quote)
 
 @client.event
 async def on_ready():
@@ -22,10 +29,16 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    if message.content.startswith('$inspire'):
+        quote = get_quote()
+        await message.channel.send(quote)
+
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
         
         
+f = open("../token",r)
+token = f.read()
 
 
-client.run(os.getenv('TOKEN'))
+client.run(token)
