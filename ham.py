@@ -41,7 +41,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    print(str(message.author) + "bepis")
+    print(str(message.author) + "hewwo")
     if userExists(str(message.author)):
         print("hooray")
         await message.channel.send(attnMsg + message.author + sanctionMsg)
@@ -65,7 +65,7 @@ async def inspire(ctx):
 async def quiz(ctx):
     
 
-    await ctx.send("beepis")
+    await ctx.send("hewwwwo")
 
 
 @bot.command()
