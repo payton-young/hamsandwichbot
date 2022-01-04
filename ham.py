@@ -42,21 +42,6 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-<<<<<<< HEAD
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-    
-||||||| ff75433
-    print(str(message.author) + "bepis")
-    if userExists(str(message.author)):
-        print("hooray")
-        await message.channel.send(attnMsg + message.author + sanctionMsg)
-        return
-
-    if message.content.startswith('!hello'): #does this serve a purpose?
-        await message.channel.send('Hello!')  
-        return
-=======
     print(str(message.author) + "hewwo")
     if userExists(str(message.author)):
         print("hooray")
@@ -66,7 +51,7 @@ async def on_message(message):
     if message.content.startswith('!hello'): #does this serve a purpose?
         await message.channel.send('Hello!')  
         return
->>>>>>> newFeature
+
     #necessary so every message is interreted and then passed to commands
     #can include more text based logic if need be such as an automated response
     
@@ -78,16 +63,6 @@ async def inspire(ctx):
     quote = get_quote()
     await ctx.send(quote)     
 
-<<<<<<< HEAD
-||||||| ff75433
-@bot.command() #quiz fucntion see requirements document
-async def quiz(ctx):
-    
-
-    await ctx.send("beepis")
-
-
-=======
 @bot.command() #quiz fucntion see requirements document
 async def quiz(ctx):
     
@@ -95,7 +70,6 @@ async def quiz(ctx):
     await ctx.send("hewwwwo")
 
 
->>>>>>> newFeature
 @bot.command()
 async def test (ctx,arg):
     await ctx.send(arg)
