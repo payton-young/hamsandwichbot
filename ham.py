@@ -19,12 +19,7 @@ Changing from client class to bot class since bot is a subclass of client and pr
 description = "HAM is a project by Payton Young"
 
 #client = discord.Client()
-### PREFIX IS ! ###
 bot = commands.Bot(command_prefix='!', description=description)
-userDict = {"":""} #load userdict on startup from a local file
-#sanctionedUsers = set(()) #will need to be read from a local file
-attnMsg = "ATTENTION THE FOLLOWING USER: "
-sanctionMsg = " HAS BEEN SANCTIONED FOR IMPROPER POSTING BEHAVIOR"
 
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
@@ -35,24 +30,19 @@ def get_quote():
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
+    #await bot.process_commands
 
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
 
-    print(str(message.author) + "bepis")
-    if userExists(str(message.author)):
-        print("hooray")
-        await message.channel.send(attnMsg + message.author + sanctionMsg)
-        return
-
-    if message.content.startswith('!hello'): #does this serve a purpose?
-        await message.channel.send('Hello!')  
-        return
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
+    
     #necessary so every message is interreted and then passed to commands
     #can include more text based logic if need be such as an automated response
-    #print("b44")
+    
     await bot.process_commands(message)
 
 @bot.command()
@@ -61,39 +51,11 @@ async def inspire(ctx):
     quote = get_quote()
     await ctx.send(quote)     
 
-@bot.command() #quiz fucntion see requirements document
-async def quiz(ctx):
-    
-
-    await ctx.send("beepis")
-
-
 @bot.command()
 async def test (ctx,arg):
     await ctx.send(arg)
 
-@bot.command()
-async def sanction (ctx,badUser):
-    if userExists(badUser):
-        return
-    
-    print(str(badUser))
-    userDict[badUser] = "S" #code will be used for checking later
-    #perform write operation on set
-    #print("well")
-    await ctx.send(badUser + sanctionMsg)
 
-
-
-#### OTHER FUNCTIONS
-def userExists(user):
-    for name in userDict:
-        if(name == user):
-            print("proof")
-            return True
-    return False
-
-###
 f = open("../token","r")
 token = f.read()
 bot.run(token)
