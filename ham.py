@@ -2,9 +2,10 @@ import discord
 import os
 import requests
 import json
+import random
 
 from discord.ext import commands
-
+from openpyxl import load_workbook
 
 #HAM is a project by Payton Young, this code started from an easily found disocrdbot template
 #template link can be found in first commit
@@ -25,6 +26,17 @@ userDict = {"":""} #load userdict on startup from a local file
 #sanctionedUsers = set(()) #will need to be read from a local file
 attnMsg = "ATTENTION THE FOLLOWING USER: "
 sanctionMsg = " HAS BEEN SANCTIONED FOR IMPROPER POSTING BEHAVIOR"
+triviaDict = {"":""}
+
+excelStruct = load_workbook( filename = 'trivia.xlsx') #from openpyxl creates a workbook object we will assign ours too
+triviaTuple = tuple(ws.rows) #grabs every row in the excel sheet and formats them as a tuple for easy unpacking
+
+#repacks tuple into a dict so we can easily and quickly reference the answers and categories of questions. 
+#Maybe a list of tuples would be easier to work with?
+for t in triviaTuple
+    tQuestion, tAnswer, tCategory = t
+    triviaDict[tQuestion] = (tAnswer, tCategory)
+
 
 def get_quote():
   response = requests.get("https://zenquotes.io/api/random")
@@ -65,9 +77,11 @@ async def inspire(ctx):
 
 @bot.command() #quiz fucntion see requirements document
 async def quiz(ctx):
+    message.channel.send('This is the start of the quiz round. Be the first person to guess the correct answer to get a point. First to 5 points wins!')
     
-
-    await ctx.send("hewwwwo")
+    
+    
+    await ctx.send("The game is finished")
 
 
 @bot.command()
